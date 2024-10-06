@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, content-scale=1.0">
+    <title>Article Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        #article-title {
+            font-size: 2.5em;
+            text-align: center;
+            color: #000;
+            margin-top: 20px; 
+            transition: opacity 1s ease;
+            font-family:'Sixtyfour Convergence';
+        }
+
+        #article-text {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px 0;
+            color: #000; 
+            transition: opacity 1s ease; 
+            font-family:'Sixtyfour Convergence';
+        }
+
+        button {
+            width: 200px;
+            height: auto;
+            padding: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: transparent; 
+            position: absolute;
+            transition: transform 2s ease-in-out, top 2s ease, left 2s ease, opacity 1s ease; /* Transition for smooth move */
+        }
+
+        button img {
+            width: 200px;
+            height: auto;
+        }
+
+        #back-button img {
+            width: 100px;
+            height: auto;
+        }
+
+        #back-button {
+            width: 100px;
+            height: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .zoom {
+            transform: scale(4);
+        }
+
+        #text {
+            font-size: 1em;
+            position: absolute;
+            text-align: center;
+            top: 200px;
+            left: 550px;
+            color: #000;
+            transition: opacity 1s ease;
+            font-family: 'Sixtyfour Convergence';
+        }
+
+        #text1, #text2, #text3,#text4,#text5 {
+            position: absolute;
+            top: 390px;
+            font-size: 25px;
+            transition: opacity 1s ease;
+            font-family: 'Sixtyfour Convergence';
+        }
+
+        #text1 {
+            text-align: center;
+            font-size: 1.1em;
+            left: 10px;
+        }
+
+        #text2 {
+            text-align: center;
+            font-size: 1.1em;
+            left: 1300px;
+        }
+
+        #text3 {
+            left: 600px;
+            top: 610px;
+        }
+
+        #text4{
+            text-align: center;
+            font-size: 1.1em;
+            left:1320px;
+            top:850px;
+        }
+
+        #text5{
+            top:850px;
+            left:90px;
+        }
+
+
+
+        <!--QUIZ-->
+        #quiz-title {
+            font-family: 'Sixtyfour Convergence'; /* Aplica a fonte ao título */
+            font-size: 0.9em; /* Ajuste de tamanho */
+            text-align: center;
+        }
+
+        #quiz-question {
+            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte à pergunta */
+            font-size: 0.9em; /* Ajuste de tamanho */
+            margin: 15px 0; /* Espaçamento */
+            text-align: center;
+        }
+
+        #quiz-options {
+            list-style: none; /* Remove os marcadores de lista */
+            padding: 0;
+        }
+
+        #quiz-options li {
+            margin: 50px 0; /* Espaçamento entre as opções */
+        }
+
+        #quiz-options input[type="radio"] {
+            margin-right: 10px; /* Espaçamento entre o botão e o texto */
+            vertical-align: middle; /* Alinha o ponto de seleção verticalmente ao centro do texto */
+        }
+
+        #quiz-options label {
+            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte ao rótulo */
+            font-size: 0.8em; /* Ajuste de tamanho */
+            display: inline-block; /* Torna o label e o input alinhados horizontalmente */
+            vertical-align: middle; /* Alinha o texto verticalmente ao centro do botão de seleção */
+        }
+
+        #quiz-result {
+            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte ao resultado do quiz */
+            font-size: 1.2em; /* Ajuste de tamanho */
+            color: rgb(255, 255, 255); /* Cor do texto (você pode mudar conforme necessário) */
+            margin-top: 20px;
+        }
+
+        #quiz-container {
+            position: absolute;
+            top: 230px;
+            left: 470px;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            width: 1500px;
+            display: none; /* Isso será controlado pelo JavaScript */
+            opacity: 1; /* Certifique-se de que a opacidade seja 1 */
+        }
+
+        #submit-quiz {
+            --😀: #644dff;
+            --😀😀: #4836bb;
+            --😀😀😀: #654dff63;
+            cursor: pointer;
+            width: 184px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.125em;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+            background: var(--😀);
+            border: 2px solid var(--😀😀);
+            border-radius: .75rem;
+            box-shadow: 0 8px 0 var(--😀😀);
+            transform: skew(-10deg);
+            transition: all .1s ease;
+            filter: drop-shadow(0 15px 20px var(--😀😀😀));
+            position: absolute;
+            top: 600px;
+        }
+
+        #submit-quiz:active {
+            letter-spacing: 0px;
+            transform: skew(-10deg) translateY(8px);
+            box-shadow: 0 0 0 var(--😀😀😀);
+        }
+
+
+</style>
+
+
+    </style>
+</head>
+<body>
+    <h1 id="article-title">EXOPLANETS</h1>
+    <p id="article-text">A brief introduction on exoplanets<br>(click the images)</p>
+    <p id="text"></p>
+    <p id="text1">Why do we study <br>exoplanets?</p>
+    <p id="text2">How do we discover new exoplanets?</p>
+    <p id="text3">Types of exoplanets</p>
+    <p id="text4">Spitzer Space Telescope</p>
+    <p id="text5">Quiz</p>
+
+    <!-- Define origin and target positions for movement -->
+    <button id="intro-button" data-origin-top="400px" data-origin-left="718px" data-target-top="400px" data-target-left="-30px" style="top: 400px; left: 718px;">
+        <img src="https://cdn.pixabay.com/photo/2023/08/01/08/08/exoplanet-8162402_1280.png" alt="Introdução">
+    </button>
+
+    <button id="body-button" data-origin-top="200px" data-origin-left="14px" data-target-top="350px" data-target-left="20px" style="top: 200px; left: 14px;">
+        <img src="https://d2pn8kiwq2w21t.cloudfront.net/images/mission-highlights-800h-v6-public-exoplanets.width-1024.png" alt="Corpo">
+    </button>
+
+    <button id="conclusion-button" data-origin-top="180px" data-origin-left="1425px" data-target-top="350px" data-target-left="30px" style="top: 180px; left: 1425px;">
+        <img src="https://png.pngtree.com/png-vector/20240203/ourmid/pngtree-space-shuttle-rocket-ai-generated-png-image_11534151.png" alt="Conclusão">
+    </button>   
+    
+    <button id="telescope-button" data-origin-top="600px" data-origin-left="1390px" data-target-top="350px" data-target-left="30px" style="top: 600px; left: 1390px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Spitzer_spacecraft_model.png" alt="Voltar">
+    </button>
+    
+    <button id="Quiz-button" data-origin-top="650px" data-origin-left="50px" data-target-top="400px" data-target-left="-30px" style="top: 650px; left: 50px;">
+        <img src="https://www.technomotion.com.br/wp-content/uploads/2023/05/ASTRONAUTA-NASA-LOGO-min-1.png" alt="Voltar">
+    </button>
+
+    <button id="back-button" class="hidden" data-origin-top="800px" data-origin-left="50px" data-target-top="800px" data-target-left="50px" style="top: 800px; left: 50px;">
+        <img src="https://cdn.icon-icons.com/icons2/1514/PNG/512/backbutton_104978.png" alt="Voltar">
+    </button>
+
+
+
+
+    <!-- Adicionando os sons -->
+    <audio id="intro-sound"src="tipo-exoplanetas.mp3"></audio>
+    <audio id="body-sound" src="Porque_Estudar_exoplanetas.mp3"></audio>
+    <audio id="conclusion-sound" src="Localizar_exoplanet.mp3"></audio>
+    <audio id="telescope-sound" src="Spitzer_Space.mp3"></audio>
+    <audio id="quiz-sound" src=""></audio>
+
+
+
+
+
+    <!--QUIZ-->
+    <div id="quiz-container">
+        <h2 id="quiz-title"></h2>
+        <div id="quiz-question"></div>
+        <ul id="quiz-options"></ul>
+        <button id="submit-quiz">Answer</button>
+        <div id="quiz-result" class="hidden"></div>
+    </div>
+    
+
+    <script>
+
+        //mudar textos, não altere o quiz aqui.
+        const sections = {
+            Intro2: `A brief introduction on exoplanets<br>(click the images)`,
+            Introduction:`Scientists have reached a number of 4903+ confirmed planets outside  the solar system (exoplanets). Exoplanet types were created to classify and order them according to their characteristics proven through the evidence collected, classifying them by comparing the exoplanets with the planets that are located in our system. The types of exoplanets are:<br><br>
+                        Gas Giants: These are planets that are the same size as Saturn, Jupiter or even much larger, composed mainly of hydrogen and helium and with a dense atmosphere. They also have a very complex and frightening climate, which can vary greatly depending on the weather events that excessively occur in their atmospheres. Examples of Gas Giants in our Solar System: Jupiter and Saturn<br><br> 
+                        Terrestrial: These are planets that are in the range of size equal to or smaller than Earth, having for the most part a solid surface, made of rocky or metallic materials. These planets have different atmospheres, formed according to the conditions and locations in which the planets are located, and may also have oceans or other types of evidence of habitability.<br><br>
+                        Neptune-like/Ice giants: They are similar in size to Neptune and Uranus. Their atmospheres are dense, but less dense than those of gas giants, composed mainly of hydrogen or helium. They are described by the predominance of water, gases and ice that make up the composition of these planets and also by the occurrence of an atmospheric appearance that results in the formation of methane clouds, giving these planets a bluish coloration.<br><br>
+                        Super-Earth: They have a greater mass than Earth, but less than Neptune. They are composed of solid and rocky materials similar to those found on Earth and their atmospheres can vary greatly between thin and dense, and some may be able to support water in its liquid state. These planets are generally located in an area where habitation is considered possible, holding a greater potential to harbor life.`,
+                    Body: `<br><br><br><br><br>Why do we study exoplanets:<br><br>
+                        Possibility of Life: Investigating exoplanets helps us explore the potential for life beyond Earth, indicating whether conditions favorable to life exist elsewhere in the universe.<br><br>
+                        Diversity of Planetary Systems: Understanding the variety of planetary systems enhances our knowledge of how planets form, evolve, and interact with their host stars.<br><br>
+                        Insights into Our Solar System: By studying exoplanets, we gain a better understanding of the origin, formation, organization, and evolution of our own Solar System.<br><br>
+                        Atmospheric and Geological Composition: Researching exoplanets allows us to analyze their atmospheric and geological features, giving us clues about their environments.<br><br>
+                        Technological Advancements: The study of exoplanets drives the development of new technologies, such as advanced probes and telescopes, which also benefit other scientific fields.<br><br>
+                        We study exoplanets to explore the potential for life beyond Earth, understand the diversity of planetary systems, gain insights into the origins of our Solar System, and stimulate technological innovations in astronomical observation. This helps us uncover more about the universe and our place within it.`,
+            Conclusion: `<br><br><br><br><br><br>There are 4 main strategies that scientists use to identify exoplanets, and of these strategies, some have been and are most used, namely:<br><br><br>
+                        Transit Method: This method consists of observing, when a planet passes by its star, what was the variation that occurred in relation to the light that the star emitted before the movement made by the planet and after the movement. This method was used in the Kepler mission.<br><br><br>
+                        Radial Velocity Method: This strategy involves observing the change that occurs in the color spectrum of stars, caused by the gravity of a planet when it enters the orbit of the observed star.<br><br><br>
+                        Gravitational Microlensing: This involves observing the phenomenon whereby light is bent and focused due to the gravity of a planet that passes between the star being observed and Earth.<br><br><br>
+                        Direct Imaging: Scientists can take photos of exoplanets and use shading techniques to reduce the brightness and light of the stars around which the exoplanets orbit.<br><br><br>`,
+            telescope: ` 
+                        The Spitzer Space Telescope was a NASA space telescope launched in 2003, designed to specialize in infrared observations. It played a crucial role in studying regions of the universe that don't contain visible light, such as distant galaxies, newborn stars, and dust disks that could potentially form planets. Some of its major contributions include:<br><br>
+                        Exoplanet Discovery: Spitzer was instrumental in identifying and studying exoplanets, particularly by observing their atmospheres and temperature variations. It played a key role in discovering planetary systems like the TRAPPIST-1 system, which contains seven Earth-sized planets.<br><br>
+                        Star and Planet Formation: With its infrared capabilities, Spitzer captured detailed images of regions where new stars and planets are forming, typically obscured by clouds of gas and dust in visible light.<br><br>
+                        Distant Galaxies: The telescope detected light from galaxies formed within the first billion years after the Big Bang, providing insights into the early stages of the universe’s evolution.<br><br>
+                        Study of Interstellar Dust and Gas: Spitzer examined the composition and distribution of dust and gas in space, enhancing our understanding of galaxy dynamics and how essential elements for life are distributed across the cosmos.<br><br>
+                        Spitzer operated until its retirement in 2020, but its data continues to be analyzed, contributing to new scientific discoveries even today.` ,
+            quiz:" "
+        };
+    
+        const articleText = document.getElementById("article-text");
+        const articleTitle = document.getElementById("article-title");
+        const text = document.getElementById("text");
+
+        const telescopeButton = document.getElementById("telescope-button");
+        const backButton = document.getElementById("back-button");
+        const introButton = document.getElementById("intro-button");
+        const bodyButton = document.getElementById("body-button");
+        const conclusionButton = document.getElementById("conclusion-button");
+        const quizButton =document.getElementById("Quiz-button")
+    
+        const introSound = document.getElementById("intro-sound");
+        const bodySound = document.getElementById("body-sound");
+        const conclusionSound = document.getElementById("conclusion-sound");
+        const telescopeSound = document.getElementById("telescope-sound");
+        const quizSound=document.getElementById("quiz-sound");
+
+        const quizContainer = document.getElementById("quiz-container");
+        const quizResult = document.getElementById("quiz-result");
+        const submitQuizButton = document.getElementById("submit-quiz");
+
+        //mudar quiz abaixo
+        const quizData = [
+            {
+                question: "Which of the following is a key reason to study exoplanets?",
+                options: [
+                    "To understand Earth's current climate conditions.",
+                    "To discover how planetary systems, including our solar system, form and evolve",
+                    "To determine the current phase of the moon.",
+                    "To explore new forms of government."
+                ],
+                answer: 1
+            },
+            {
+                question: `What is the relationship between the Spitzer Space
+                Telescope and the discovery of exoplanets?`,
+                options: [
+                    "Spitzer was responsible for artificially creating exoplanets<br> in the laboratory and then observing them from a distance.",
+                    "Spitzer specializes in studying only black holes<br> and has no relationship with exoplanets",
+                    "Spitzer was the first telescope to send probes<br> to land on exoplanets and collect samples directly from their surfaces.",
+                    "Spitzer was instrumental in detecting and studying exoplanets,<br> observing their atmospheres and temperature changes in the infrared."
+                ],
+                answer: 3
+            },
+            {
+                question: `Which method used to detect exoplanets relies on measuring the 
+                reduction in starlight as a planet crosses in front of its star, 
+                providing insights into the planet's size, orbit, and atmospheric composition,
+                and was famously utilized in the Kepler Mission?`,
+                options: [
+                    "Radial Velocity Method – which detects changes in a star’s spectrum<br> due to the gravitational pull of orbiting planets.",
+                    "Gravitational Microlensing – which observes the bending of light<br> caused by the gravitational field of a planet passing between a star and Earth.",
+                    "Direct Imaging – which captures actual images of exoplanets<br> by reducing the brightness of the host star.",
+                    "Transit Method – which measures the dip in starlight<br> as a planet transits in front of its star, revealing key planetary characteristics."
+                ],
+                answer: 3
+            },
+            {
+                question: `Which type of exoplanet is primarily composed of 
+                hydrogen and helium, with a dense atmosphere and a larger size than Earth, 
+                and is known for hosting extreme weather 
+                conditions in its atmosphere, similar to planets like Jupiter and Saturn?`,
+                options: [
+                    "Terrestrial Planets – smaller planets with solid surfaces,<br> typically composed of rocky or metallic materials.",
+                    "Neptune-like/Ice Giants – planets similar in size<br> to Neptune or Uranus, with dense atmospheres composed of hydrogen, helium, and icy components.",
+                    "Gas Giants – planets larger than Earth, predominantly<br> composed of hydrogen and helium, known for their complex atmospheres and extreme climates.",
+                    "Super-Earths – planets larger than Earth but smaller<br> than Neptune, with solid, rocky surfaces and varying atmospheric conditions."
+                ],
+                answer: 2
+            }
+        ];
+
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const currentQuestion = quizData[currentQuestionIndex];
+            document.getElementById('quiz-question').innerText = currentQuestion.question;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = ''; // Limpar opções anteriores
+
+            currentQuestion.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="radio" name="option" value="${index}" id="option${index}"> <label for="option${index}">${option}</label>`;
+                optionsContainer.appendChild(li);
+            });
+        }
+
+        function submitQuiz() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                const selectedAnswerIndex = parseInt(selectedOption.value);
+                const correctAnswerIndex = quizData[currentQuestionIndex].answer;
+
+                const resultContainer = document.getElementById('quiz-result');
+                if (selectedAnswerIndex === correctAnswerIndex) {
+                    if (currentQuestionIndex < 3){
+                        resultContainer.innerText = 'Correto!';
+                    }
+                    else{
+                        resultContainer.innerText = 'You completed the quiz, congratulations!';
+                    }
+                    
+                } else {
+                    resultContainer.innerText = 'Incorreto.'
+                }
+                resultContainer.classList.remove('hidden');
+            }
+        }
+
+
+
+
+        function playSound(audioElement) {
+            if (audioElement.readyState >= 2) { // Áudio está pronto
+            audioElement.currentTime = 0;
+            audioElement.play().catch((error) => {
+            console.log('Erro ao tentar reproduzir o som:', error);
+            });
+            } else {
+                console.log('O som não está pronto para ser reproduzido.');
+            }}
+
+
+
+        function showSection(section) {
+            text.classList.remove('fade-out');
+            text.innerHTML = sections[section];
+        }
+    
+        function fadeOutElements(excludedButton, section, sound) {
+            articleTitle.classList.add('fade-out');
+            articleText.classList.add('fade-out');
+            text1.classList.add('fade-out');
+            text2.classList.add('fade-out');
+            text3.classList.add('fade-out');
+            text4.classList.add('fade-out');
+            text5.classList.add('fade-out');
+    
+            document.querySelectorAll("button").forEach(button => {
+                if (button !== backButton && button !== excludedButton) {
+                    button.classList.add('fade-out');
+                }
+            });
+    
+            setTimeout(() => {
+                showSection(section);
+                backButton.classList.remove("hidden");
+                playSound(sound);
+            }, 500);
+        }
+    
+        function resetScreen() {
+
+
+            const audioElements = document.querySelectorAll("audio");
+            audioElements.forEach(audio => {
+                audio.pause(); // Pausa o áudio
+                audio.currentTime = 0; // Reinicia o áudio
+            });
+
+
+            articleTitle.classList.remove('fade-out');
+            articleText.classList.remove('fade-out');
+            text1.classList.remove('fade-out');
+            text2.classList.remove('fade-out');
+            text3.classList.remove('fade-out');
+            text4.classList.remove('fade-out');
+            text5.classList.remove('fade-out')
+            text.classList.add('fade-out');
+            backButton.classList.add("hidden");
+    
+            articleText.innerHTML = sections.Intro2;
+            text.innerHTML = ""; 
+    
+            document.querySelectorAll("button").forEach(button => {
+                button.classList.remove('zoom', 'fade-out');
+                button.style.top = button.getAttribute('data-origin-top');
+                button.style.left = button.getAttribute('data-origin-left');
+            });
+        }
+    
+        function moveButton(button) {
+            const targetTop = button.getAttribute('data-target-top');
+            const targetLeft = button.getAttribute('data-target-left');
+            button.style.top = targetTop;
+            button.style.left = targetLeft;
+            button.classList.add('zoom');
+        }
+    
+        introButton.addEventListener("click", function() {
+            moveButton(this);
+            fadeOutElements(this, "Introduction", introSound);
+        });
+    
+        bodyButton.addEventListener("click", function() {
+            moveButton(this);
+            fadeOutElements(this, "Body", bodySound);
+        });
+    
+        conclusionButton.addEventListener("click", function() {
+            moveButton(this);
+            fadeOutElements(this, "Conclusion", conclusionSound);
+        });
+
+        telescopeButton.addEventListener("click", function() {
+            moveButton(this);
+            fadeOutElements(this, "telescope", telescopeSound);
+        });
+
+        quizButton.addEventListener("click", function() {
+            moveButton(this);
+            fadeOutElements(this, "quiz", quizSound);
+            submitQuizButton.classList.remove("fade-out")
+            quizContainer.classList.remove("hidden");
+            quizContainer.style.display = "block";
+            quizContainer.style.opacity = "1";  // Certifique-se de que a opacidade está definida corretamente
+        });
+
+        document.getElementById('Quiz-button').addEventListener('click', function () {
+            document.getElementById('quiz-container').style.display = 'block'; // Exibe o container do quiz
+            displayQuestion(); // Chama a função para mostrar a primeira pergunta
+        });
+
+
+
+        document.getElementById('submit-quiz').addEventListener('click', function () {
+            submitQuiz(currentQuestionIndex);
+
+            // Verifica se a resposta está correta antes de avançar
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                const selectedAnswerIndex = parseInt(selectedOption.value);
+                const correctAnswerIndex = quizData[currentQuestionIndex].answer;
+            
+                if (selectedAnswerIndex === correctAnswerIndex) {
+                    currentQuestionIndex++; // Avança para a próxima pergunta apenas se a resposta estiver correta
+                }
+            }
+        
+            // Se houver uma próxima pergunta, exibe-a após 2 segundos
+            if (currentQuestionIndex < quizData.length) {
+                setTimeout(() => {
+                    displayQuestion(); // Exibe a próxima pergunta
+                    document.getElementById('quiz-result').classList.add('hidden'); // Oculta o resultado
+                }, 500);
+            } else {
+                submitQuizButton.classList.add('fade-out');
+                resultContainer.innerText = 'You completed the quiz, congratulations!';
+            }
+            });
+
+    
+        backButton.addEventListener("click", function() {
+            resetScreen();
+            quizContainer.style.display = "none"; // Oculta o quiz quando voltar
+            });
+    </script>
+</body>
+</html>
