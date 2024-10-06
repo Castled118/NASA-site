@@ -3,8 +3,8 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, content-scale=1.0">
-    <title>Article Viewer</title>
+    <meta name="exoplanets" content="width=device-width, content-scale=1.0">
+    <title>Exoplanets</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -235,7 +235,7 @@
     </button>
 
     <button id="conclusion-button" data-origin-top="180px" data-origin-left="1425px" data-target-top="350px" data-target-left="30px" style="top: 180px; left: 1425px;">
-        <img src="https://png.pngtree.com/png-vector/20240203/ourmid/pngtree-space-shuttle-rocket-ai-generated-png-image_11534151.png" alt="Conclusão">
+        <img src="https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-space-rocket-launch-png-image_11584264.png" alt="Conclusão">
     </button>   
     
     <button id="telescope-button" data-origin-top="600px" data-origin-left="1390px" data-target-top="350px" data-target-left="30px" style="top: 600px; left: 1390px;">
@@ -243,11 +243,11 @@
     </button>
     
     <button id="Quiz-button" data-origin-top="650px" data-origin-left="50px" data-target-top="400px" data-target-left="-30px" style="top: 650px; left: 50px;">
-        <img src="https://www.technomotion.com.br/wp-content/uploads/2023/05/ASTRONAUTA-NASA-LOGO-min-1.png" alt="Voltar">
+        <img src="https://static.vecteezy.com/system/resources/previews/033/292/066/original/astronaut-isolated-on-transparent-background-format-elements-of-this-image-furnished-by-nasa-png.png" alt="Voltar">
     </button>
 
     <button id="back-button" class="hidden" data-origin-top="800px" data-origin-left="50px" data-target-top="800px" data-target-left="50px" style="top: 800px; left: 50px;">
-        <img src="https://cdn.icon-icons.com/icons2/1514/PNG/512/backbutton_104978.png" alt="Voltar">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/015/270/848/small/left-arrow-direction-solid-icon-in-gradient-colors-interface-signs-illustration-png.png" alt="Voltar">
     </button>
 
 
@@ -404,14 +404,14 @@
                 const resultContainer = document.getElementById('quiz-result');
                 if (selectedAnswerIndex === correctAnswerIndex) {
                     if (currentQuestionIndex < 3){
-                        resultContainer.innerText = 'Correto!';
+                        resultContainer.innerText = 'Correct!';
                     }
                     else{
                         resultContainer.innerText = 'You completed the quiz, congratulations!';
                     }
                     
                 } else {
-                    resultContainer.innerText = 'Incorreto.'
+                    resultContainer.innerText = 'Incorrect.'
                 }
                 resultContainer.classList.remove('hidden');
             }
