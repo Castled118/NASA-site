@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+   
     <meta charset="UTF-8">
     <meta name="exoplanets" content="width=device-width, content-scale=1.0">
     <title>Exoplanets</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,19 +19,19 @@
         #article-title {
             font-size: 2.5em;
             text-align: center;
-            color: #000;
+            color: #ffffff;
             margin-top: 20px; 
             transition: opacity 1s ease;
-            font-family:'Sixtyfour Convergence';
+            font-family:"Orbitron";
         }
 
         #article-text {
             font-size: 1.5em;
             text-align: center;
             margin: 20px 0;
-            color: #000; 
+            color: rgb(255, 255, 255);
             transition: opacity 1s ease; 
-            font-family:'Sixtyfour Convergence';
+            font-family:"Orbitron";
         }
 
         button {
@@ -74,65 +75,67 @@
         }
 
         #text {
-            font-size: 1em;
+            font-size: 1.4em;
             position: absolute;
             text-align: center;
-            top: 200px;
+            top: 150px;
             left: 550px;
-            color: #000;
+            color: rgb(255, 255, 255);
             transition: opacity 1s ease;
-            font-family: 'Sixtyfour Convergence';
+            font-family: "Orbitron";
         }
 
         #text1, #text2, #text3,#text4,#text5 {
+            font-size: 1.3em;
+            color: rgb(255, 255, 255);
             position: absolute;
             top: 390px;
             font-size: 25px;
             transition: opacity 1s ease;
-            font-family: 'Sixtyfour Convergence';
+            font-family: "Orbitron";
         }
 
         #text1 {
             text-align: center;
             font-size: 1.1em;
-            left: 10px;
+            left: 50px;
         }
 
         #text2 {
             text-align: center;
-            font-size: 1.1em;
-            left: 1300px;
+            left: 1310px;
         }
 
         #text3 {
-            left: 600px;
+            left: 690px;
             top: 610px;
         }
 
         #text4{
             text-align: center;
-            font-size: 1.1em;
-            left:1320px;
+            left:1360px;
             top:850px;
         }
 
         #text5{
             top:850px;
-            left:90px;
+            left:130px;
         }
 
 
 
         <!--QUIZ-->
         #quiz-title {
-            font-family: 'Sixtyfour Convergence'; /* Aplica a fonte ao título */
-            font-size: 0.9em; /* Ajuste de tamanho */
+            color: rgb(255, 255, 255);
+            font-family: "Orbitron"; /* Aplica a fonte ao título */
+            font-size: 1.2em; /* Ajuste de tamanho */
             text-align: center;
         }
 
         #quiz-question {
-            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte à pergunta */
-            font-size: 0.9em; /* Ajuste de tamanho */
+            color: rgb(255, 255, 255);
+            font-family: "Orbitron", sans-serif; /* Aplica a fonte à pergunta */
+            font-size: 1.2em; /* Ajuste de tamanho */
             margin: 15px 0; /* Espaçamento */
             text-align: center;
         }
@@ -152,14 +155,15 @@
         }
 
         #quiz-options label {
-            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte ao rótulo */
-            font-size: 0.8em; /* Ajuste de tamanho */
+            color: rgb(255, 255, 255);
+            font-family: "Orbitron", sans-serif; /* Aplica a fonte ao rótulo */
+            font-size: 1.2em; /* Ajuste de tamanho */
             display: inline-block; /* Torna o label e o input alinhados horizontalmente */
             vertical-align: middle; /* Alinha o texto verticalmente ao centro do botão de seleção */
         }
 
         #quiz-result {
-            font-family: 'Sixtyfour Convergence', sans-serif; /* Aplica a fonte ao resultado do quiz */
+            font-family: "Orbitron", sans-serif; /* Aplica a fonte ao resultado do quiz */
             font-size: 1.2em; /* Ajuste de tamanho */
             color: rgb(255, 255, 255); /* Cor do texto (você pode mudar conforme necessário) */
             margin-top: 20px;
@@ -284,20 +288,20 @@
                         Terrestrial: These are planets that are in the range of size equal to or smaller than Earth, having for the most part a solid surface, made of rocky or metallic materials. These planets have different atmospheres, formed according to the conditions and locations in which the planets are located, and may also have oceans or other types of evidence of habitability.<br><br>
                         Neptune-like/Ice giants: They are similar in size to Neptune and Uranus. Their atmospheres are dense, but less dense than those of gas giants, composed mainly of hydrogen or helium. They are described by the predominance of water, gases and ice that make up the composition of these planets and also by the occurrence of an atmospheric appearance that results in the formation of methane clouds, giving these planets a bluish coloration.<br><br>
                         Super-Earth: They have a greater mass than Earth, but less than Neptune. They are composed of solid and rocky materials similar to those found on Earth and their atmospheres can vary greatly between thin and dense, and some may be able to support water in its liquid state. These planets are generally located in an area where habitation is considered possible, holding a greater potential to harbor life.`,
-                    Body: `<br><br><br><br><br>Why do we study exoplanets:<br><br>
+                    Body: `<br><br>Why do we study exoplanets:<br><br>
                         Possibility of Life: Investigating exoplanets helps us explore the potential for life beyond Earth, indicating whether conditions favorable to life exist elsewhere in the universe.<br><br>
                         Diversity of Planetary Systems: Understanding the variety of planetary systems enhances our knowledge of how planets form, evolve, and interact with their host stars.<br><br>
                         Insights into Our Solar System: By studying exoplanets, we gain a better understanding of the origin, formation, organization, and evolution of our own Solar System.<br><br>
                         Atmospheric and Geological Composition: Researching exoplanets allows us to analyze their atmospheric and geological features, giving us clues about their environments.<br><br>
                         Technological Advancements: The study of exoplanets drives the development of new technologies, such as advanced probes and telescopes, which also benefit other scientific fields.<br><br>
                         We study exoplanets to explore the potential for life beyond Earth, understand the diversity of planetary systems, gain insights into the origins of our Solar System, and stimulate technological innovations in astronomical observation. This helps us uncover more about the universe and our place within it.`,
-            Conclusion: `<br><br><br><br><br><br>There are 4 main strategies that scientists use to identify exoplanets, and of these strategies, some have been and are most used, namely:<br><br><br>
+            Conclusion: `<br><br><br><br>There are 4 main strategies that scientists use to identify exoplanets, and of these strategies, some have been and are most used, namely:<br><br><br>
                         Transit Method: This method consists of observing, when a planet passes by its star, what was the variation that occurred in relation to the light that the star emitted before the movement made by the planet and after the movement. This method was used in the Kepler mission.<br><br><br>
                         Radial Velocity Method: This strategy involves observing the change that occurs in the color spectrum of stars, caused by the gravity of a planet when it enters the orbit of the observed star.<br><br><br>
                         Gravitational Microlensing: This involves observing the phenomenon whereby light is bent and focused due to the gravity of a planet that passes between the star being observed and Earth.<br><br><br>
                         Direct Imaging: Scientists can take photos of exoplanets and use shading techniques to reduce the brightness and light of the stars around which the exoplanets orbit.<br><br><br>`,
             telescope: ` 
-                        The Spitzer Space Telescope was a NASA space telescope launched in 2003, designed to specialize in infrared observations. It played a crucial role in studying regions of the universe that don't contain visible light, such as distant galaxies, newborn stars, and dust disks that could potentially form planets. Some of its major contributions include:<br><br>
+                        <br><br><br>The Spitzer Space Telescope was a NASA space telescope launched in 2003, designed to specialize in infrared observations. It played a crucial role in studying regions of the universe that don't contain visible light, such as distant galaxies, newborn stars, and dust disks that could potentially form planets. Some of its major contributions include:<br><br>
                         Exoplanet Discovery: Spitzer was instrumental in identifying and studying exoplanets, particularly by observing their atmospheres and temperature variations. It played a key role in discovering planetary systems like the TRAPPIST-1 system, which contains seven Earth-sized planets.<br><br>
                         Star and Planet Formation: With its infrared capabilities, Spitzer captured detailed images of regions where new stars and planets are forming, typically obscured by clouds of gas and dust in visible light.<br><br>
                         Distant Galaxies: The telescope detected light from galaxies formed within the first billion years after the Big Bang, providing insights into the early stages of the universe’s evolution.<br><br>
